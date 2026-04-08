@@ -1,30 +1,36 @@
-# Evidencia-1-DDA
+# Sistema de Control de Entregas - Distribuidora Halcon
 
-# Sistema de Gestion de Distribucion Halcon
--------------------------------------------
+Este proyecto es la parte programada (Evidencia 2) para la distribuidora de materiales Halcon. El sistema permite gestionar todo el proceso de ventas y entrega de material, asegurando que el cliente siempre sepa dónde está su pedido.
 
-# Descripcion del Proyecto
-Este proyecto consiste en el desarrollo de una aplicacion web para la empresa Halcon, una distribuidora de materiales de construccion. El sistema busca automatizar los procesos internos mediante un panel administrativo con gestion de roles y una interfaz de consulta para clientes finales. La plataforma cubre todo el flujo operativo, desde el levantamiento del pedido en el departamento de ventas hasta la confirmacion de entrega mediante evidencia fotografica en la ruta de distribucion.
+## Lo que hice en esta Evidencia (LO2):
 
-# Objetivos del Sistema
+### 1. Modelos y Relaciones
+- Creé los modelos **User, Role, Pedido y Evidencia**.
+- Configuré las relaciones para que todo esté conectado: un usuario tiene un rol (departamento), un pedido pertenece a un usuario y un pedido puede tener varias fotos de evidencia.
 
--Proporcionar a los clientes una herramienta de consulta de estatus basada en numero de factura y numero de cliente.
+### 2. Base de Datos (Migraciones)
+- Diseñé las tablas con sus llaves primarias y foráneas para que no haya errores de datos.
+- Implementé el **Soft Delete (Borrado Lógico)** para que, al "borrar" una orden, esta se guarde en una sección de archivados y se pueda recuperar después.
 
--Centralizar la operacion de los departamentos de Ventas, Compras, Almacen y Ruta.
+### 3. Controladores y Rutas
+- Programé el **PedidoController** y el **UserController** con todas sus funciones.
+- Todas las rutas administrativas están protegidas para que solo el personal registrado pueda entrar.
 
--Implementar un sistema de evidencias fotograficas para asegurar la trazabilidad de las entregas.
+### 4. Vistas (Frontend)
+- **Para Clientes:** Creé una página de inicio con un buscador de facturas. Si el pedido ya se entregó, el sistema muestra la foto de la evidencia.
+- **Para el Personal:** Un Dashboard con acceso a:
+    - Lista de Órdenes (ordenadas de la más nueva a la más vieja).
+    - Creación y actualización de pedidos con subida de fotos.
+    - Gestión de usuarios (activar/desactivar personal y asignar departamentos).
+    - Sección de Archivados para recuperar órdenes borradas.
 
--Gestionar el inventario y las adquisiciones de material de manera eficiente.
+## Cómo correr el proyecto:
 
--Permitir la administracion de usuarios y la recuperacion de registros mediante borrado logico.
+1. **Instalar todo:** Ejecutar `composer install` y `npm install`.
+2. **Base de Datos:** Correr `php artisan migrate --seed` para crear las tablas y los usuarios de prueba.
+3. **Fotos:** Muy importante correr `php artisan storage:link` para que las fotos de evidencia se puedan ver.
+4. **Servidor:** Correr `php artisan serve` y en otra terminal `npm run dev`.
 
-# Requerimientos de Software
-
--Sistema de gestion de base de datos relacional.
-
--Entorno de ejecucion para el servidor web.
-
--Framework para el desarrollo de la interfaz de usuario.
-
--Herramientas de control de versiones Git.
-
+**Cuenta de Administrador para pruebas:**
+- **Correo:** admin@halcon.com
+- **Contraseña:** password123
