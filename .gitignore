@@ -3,6 +3,9 @@
 .env
 .env.backup
 .env.production
+/deploy/htdocs_staging
+/deploy/htdocs_staging.zip
+/deploy/zips
 .phpactor.json
 .phpunit.result.cache
 /.fleet
