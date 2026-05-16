@@ -2,6 +2,21 @@
 
 Este proyecto es la parte programada (Evidencia 2) para la distribuidora de materiales Halcon. El sistema permite gestionar todo el proceso de ventas y entrega de material, asegurando que el cliente siempre sepa dónde está su pedido.
 
+## Despliegue en línea
+
+- **Aplicación desplegada (frontend + backend Laravel)**:
+  https://evidenciafinal.lovestoblog.com
+
+- **Hosting**: InfinityFree (PHP 8.3 + MySQL)
+- **Base de datos**: MySQL en `sql211.infinityfree.com` (administrable vía phpMyAdmin desde el panel de InfinityFree).
+
+### Credenciales de prueba
+
+- **Email:** `admin@halcon.com`
+- **Password:** `password123`
+
+---
+
 ## Lo que hice en esta Evidencia (LO2):
 
 ### 1. Modelos y Relaciones

@@ -1,0 +1,38 @@
+# Renombra este archivo a ".htaccess" (con punto adelante) y subelo a htdocs/
+# Es el mismo de public/.htaccess pero con un bloque extra para BLOQUEAR
+# acceso publico a carpetas sensibles de Laravel.
+
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+    RewriteEngine On
+
+    # Bloquear acceso directo a carpetas internas de Laravel
+    RewriteRule ^(app|bootstrap|config|database|resources|routes|storage|tests|vendor|\.env)(/.*)?$ - [F,L]
+
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Handle X-XSRF-Token Header
+    RewriteCond %{HTTP:x-xsrf-token} .
+    RewriteRule .* - [E=HTTP_X_XSRF_TOKEN:%{HTTP:X-XSRF-Token}]
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Send Requests To Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+</IfModule>
+
+# Negar lectura directa de .env (defensa adicional)
+<Files ".env">
+    Order allow,deny
+    Deny from all
+</Files>
